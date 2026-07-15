@@ -41,7 +41,7 @@
                 <h3 class="guest-name">Nama Tamu Undangan</h3>
                 
                 <audio id="wedding-music" loop>
-                    <source src="Laguuweding.mp3" type="audio/mpeg">
+                    <source src="song_w.mp3" type="audio/mpeg">
                 </audio>
 
 
@@ -447,16 +447,25 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
         function bukaUndangan() {
-            const entrance = document.getElementById('entrance-screen');
-            const main = document.getElementById('main-content');
-            entrance.classList.add('fade-out');
-            
-            setTimeout(() => {
-                entrance.style.display = 'none';
-                main.classList.remove('locked');
-                main.style.opacity = '1';
-            }, 2500);
-        }
+    const entrance = document.getElementById('entrance-screen');
+    const main = document.getElementById('main-content');
+    const music = document.getElementById('wedding-music'); // Ambil elemen audio
+
+    // 1. Putar lagu secara otomatis saat klik
+    if (music) {
+        music.play().catch(error => {
+            console.log("Autoplay dicegah oleh browser, membutuhkan interaksi lanjutan:", error);
+        });
+    }
+
+    // 2. Jalankan animasi pembukaan pintu/kotak
+    entrance.classList.add('fade-out');
+    
+    setTimeout(() => {
+        entrance.style.display = 'none';
+        main.classList.remove('locked');
+        main.style.opacity = '1';
+    }, 2500);
 
         // --- FUNGSI DETEKSI SCROLL REVERSE ANIMASI ---
 function handleScrollReveal() {
