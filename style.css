@@ -368,6 +368,7 @@
     /* Kita tambahkan gap dan margin langsung di sini agar aman */
     gap: 15px; 
     margin: 30px auto; 
+    background: #ffffff;
 
   
 } /* <--- PASTIKAN ADA TANDA TUTUP INI DI BARIS 318! */
