@@ -40,8 +40,8 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at 50% 50%, var(--putih-bersih) 0%, var(--biru-awan-muda) 60%, var(--biru-awan-gelap) 100%);
-    transition: transform 2.5s cubic-bezier(0.25, 1, 0.5, 1); 
+    background: radial-gradient(circle at 30% 70%, var(--putih-bersih) 0%, #ffffff 60%, #fbebeb 100%);
+    transition: transform 5s cubic-bezier(0.5, 1, 1, 0.5); 
     z-index: 1;
 }
 
@@ -131,7 +131,7 @@
     align-items: center;
     padding: 0; /* Dibuat 0 agar cover bisa penuh jika di mobile */
     /* Background perpaduan biru keputihan estetik sesuai request */
-    background: linear-gradient(180deg, #e6f0fa 0%, #eef3f7 50%, #fbebeb 100%);
+    background: linear-gradient(180deg, #fbebeb 0%, #eef3f7 50%, #e6f0fa 100%);
     background-attachment: fixed;
     opacity: 0;
     transition: opacity 1s ease;
@@ -148,7 +148,7 @@
     width: 100%;
     max-width: 450px;
     min-height: 100vh; /* Memenuhi layar agar foto terlihat megah */
-    background: linear-gradient(135deg, #e6f0fa 0%, #fdfdfd 50%, #fbebeb 100%);
+    background: linear-gradient(135deg, #e6f0fa 0%, #fbfbfb 70%, #fbebeb 100%);
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -163,7 +163,7 @@
 .cover-photo-wrapper {
     position: relative;
     width: 100%;
-    height: 55vh; /* Mengambil 55% tinggi layar untuk foto */
+    height: 75vh; /* Mengambil 55% tinggi layar untuk foto */
     overflow: hidden;
 }
 
@@ -430,7 +430,8 @@
     font-size: 20px;
     font-weight: bold;
     color: #b58d63; /* Warna krem emas mewah sesuai referensi */
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    margin-top: 20px;
 }
 
 .salam-text {
@@ -857,34 +858,62 @@
     padding: 25px 20px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
+/* ==========================================================================
+   KOTAK STATIS COUNTER KEHADIRAN (BERJEJER KE SAMPING)
+   ========================================================================== */
 
-/* Kotak Statis Counter */
-.attendance-summary {
+/* Pembungkus utama agar isinya berjejer ke samping secara otomatis */
+.counter-box {
     display: flex;
-    gap: 15px;
+    justify-content: space-between;
+    gap: 15px; /* Jarak antara kotak biru dan kotak merah */
     margin-bottom: 25px;
+    width: 100%;
 }
 
+/* Base style untuk tiap kotak summary */
 .summary-box {
-    flex: 1;
+    flex: 1; /* Membagi ruang sama rata kanan-kiri */
     border-radius: 10px;
-    padding: 10px;
+    padding: 5px 10px;
     text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
 }
 
-.summary-box span {
-    font-size: 18px;
-    font-weight: bold;
-    display: block;
+/* WARNA BACKGROUND KOTAK HADIR (BIRU LEMBUT) */
+.box-hadir {
+    background-color: #e6f0fa !important;
 }
 
+/* WARNA BACKGROUND KOTAK ABSEN (MERAH MUDA LEMBUT) */
+.box-absen {
+    background-color: #f8d7da !important;
+}
+
+/* PENGATURAN TEKS ANGKA UTAMA (Menggunakan ID) */
+#count-hadir,
+#count-absen {
+    font-size: 2.2rem;          /* Ukuran angka besar dan jelas */
+    font-weight: 700;            /* Tebal (Bold) */
+    color: #333333;              /* Warna angka abu-abu gelap */
+    margin: 0;
+    padding: 0;
+    display: block;              /* Membuat angka berada di baris sendiri */
+}
+
+/* Keterangan teks di bawah angka ("Hadir" / "Tidak Hadir") */
 .summary-box p {
-    font-size: 12px;
-    margin-top: 2px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #555555;
+    margin: 4px 0 0 0;           /* Jarak tipis tepat di bawah angka */
 }
 
-.box-hadir { background-color: #e6f0fa; color: #fffff; }
-.box-absen { background-color: #f8d7da; color: #fffff; }
+
+
+
+
+
 
 /* Form Desain */
 .wishes-form {
@@ -1094,29 +1123,7 @@
     position: relative; /* Ini wajib ada agar ornamen tidak lari ke luar kartu */
 }
 
-/* Mengatur posisi ornamen menempel pada kartu putih */
-.ornament {
-    position: absolute; /* Menempel relatif terhadap .wedding-card */
-    width: 90px;        /* Ukurannya kita buat lebih pas di pojok bingkai */
-    height: 90px;
-    z-index: 10;        /* Berada di atas foto */
-    pointer-events: none; 
-    opacity: 0;         
-}
 
-/* Pojok Kiri Atas Kartu (Menimpa pojok kiri atas foto) */
-.ornament-top-left {
-    top: 0px;
-    left: 0px;
-    animation: munculKiriAtas 1.5s ease-out forwards, floatingKiri 4s ease-in-out infinite 1.5s;
-}
-
-/* Pojok Kanan Bawah Kartu (Di bagian paling bawah kartu putih) */
-.ornament-bottom-right {
-    bottom: 0px;
-    right: 0px;
-    animation: munculKananBawah 1.5s ease-out forwards, floatingKanan 4s ease-in-out infinite 1.5s;
-}
 
 /* --- KEYFRAMES ANIMASI (Tetap sama) --- */
 @keyframes munculKiriAtas {
@@ -1251,6 +1258,10 @@ body .doa-card {
     -webkit-backdrop-filter: blur(10px) !important;
     border: 1px solid rgba(255, 255, 255, 0.6) !important;
     box-shadow: 0 15px 35px rgba(225, 215, 205, 0.2) !important;
+}
+/* Menyembunyikan tombol hapus admin agar tidak terlihat oleh tamu */
+.btn-delete-admin {
+    display: none !important;
 }
 
 

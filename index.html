@@ -31,29 +31,7 @@
 
         <div class="wedding-card scroll-reveal">
       <!-- ORNAMEN ESTETIK POJOK KIRI ATAS & KANAN BAWAH -->
-<div class="ornament ornament-top-left">
-    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Pola Sudut Estetik Emas -->
-        <path d="M0,0 L40,0 C25,15 15,25 0,40 Z" fill="#d4af37" opacity="0.15"/>
-        <path d="M0 0 L100 0 C80 15 50 20 40 40 C20 50 15 80 0 100 C0 80 5 50 15 40 C20 20 40 15 0 0 Z" fill="#b58d63" opacity="0.3"/>
-        <path d="M0,2 Q15,15 2,30 Q10,15 30,2" stroke="#b58d63" stroke-width="1.5" fill="none"/>
-        <circle cx="20" cy="20" r="2" fill="#d4af37"/>
-        <circle cx="35" cy="10" r="1.5" fill="#d4af37"/>
-        <circle cx="10" cy="35" r="1.5" fill="#d4af37"/>
-    </svg>
-</div>
 
-<div class="ornament ornament-bottom-right">
-    <svg viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <!-- Pola Sudut Estetik Emas (Diputar ke kanan bawah) -->
-        <path d="M100,100 L60,100 C75,85 85,75 100,60 Z" fill="#d4af37" opacity="0.15"/>
-        <path d="M100 100 L0 100 C20 85 50 80 60 60 C80 50 85 20 100 0 C100 20 95 50 85 60 C80 80 60 85 100 100 Z" fill="#b58d63" opacity="0.3"/>
-        <path d="M100,98 Q85,85 98,70 Q90,85 70,98" stroke="#b58d63" stroke-width="1.5" fill="none"/>
-        <circle cx="80" cy="80" r="2" fill="#d4af37"/>
-        <circle cx="65" cy="90" r="1.5" fill="#d4af37"/>
-        <circle cx="90" cy="65" r="1.5" fill="#d4af37"/>
-    </svg>
-</div>
 
             
             <div class="cover-photo-wrapper">
@@ -308,17 +286,24 @@
             <!-- KARTU UTAMA BUKU TAMU -->
             <div class="wishes-card scroll-reveal">
                 
-                <!-- Ringkasan Kehadiran Counter -->
-                <div class="attendance-summary">
-                    <div class="summary-box box-hadir">
-                        <span id="count-hadir scroll-reveal">0</span>
-                        <p>Hadir</p>
-                    </div>
-                    <div class="summary-box box-absen scroll-reveal">
-                        <span id="count-absen scroll-reveal">0</span>
-                        <p>Tidak Hadir</p>
-                    </div>
-                </div>
+<!-- Ringkasan Kehadiran Counter -->
+<div class="counter-box">
+    
+    <!-- KOTAK HADIR -->
+    <div class="summary-box box-hadir">
+        <h3 id="count-hadir">0</h3>
+        <p>Hadir</p>
+    </div>
+
+    <!-- KOTAK TIDAK HADIR -->
+    <div class="summary-box box-absen">
+        <h3 id="count-absen">0</h3>
+        <p>Tidak Hadir</p>
+    </div>
+
+</div>
+
+
 
                 <!-- Form Input Ucapan -->
                 <form id="form-ucapan" class="wishes-form scroll-reveal">
@@ -388,87 +373,144 @@
     </div>
 
     <script>
-      // --- SISTEM MANAGEMENT BUKU TAMU & MODERASI ADMIN ---
-const ADMIN_PASSWORD = "bismillahica"; 
+// ==========================================================================
+// 1. SISTEM MANAGEMENT BUKU TAMU, STORAGE, & MODERASI ADMIN
+// ==========================================================================
+const ADMIN_PASSWORD = "bismillahica";
 
-let dataKomentar = [
-    { id: 1, nama: "Cati", ucapan: "Masya Allah, selamat Ica ❤️. Semoga dilancarkan segala urusannya, Sakinah Mawaddah Warahmah 💐🌹.", kehadiran: "Tidak Hadir", waktu: "Baru saja" },
-    { id: 2, nama: "Kity", ucapan: "Wihh selamat yah kak, lancar terus sampai hari-H. Bahagia selalu buat kalian berdua 😇🥰", kehadiran: "Hadir", waktu: "1 jam lalu" }
+// Komentar bawaan jika memori browser (localStorage) masih kosong
+const komentarBawaan = [
+    { 
+        id: 1, 
+        nama: "Cati", 
+        ucapan: "Masya Allah, selamat Ica ❤️. Semoga dilancarkan segala urusannya, Sakinah Mawaddah Warahmah 🌹.", 
+        kehadiran: "Tidak Hadir", 
+        waktu: "Baru saja" 
+    },
+    { 
+        id: 2, 
+        nama: "Kity", 
+        ucapan: "Wihh selamat yah kak, lancar terus sampai hari-H. Bahagia selalu buat kalian berdua 🥰", 
+        kehadiran: "Hadir", 
+        waktu: "1 jam lalu" 
+    }
 ];
+
+// Ambil data dari localStorage, jika kosong gunakan komentarBawaan
+let dataKomentar = JSON.parse(localStorage.getItem('undangan_komentar')) || komentarBawaan;
 
 const formUcapan = document.getElementById('form-ucapan');
 const commentsContainer = document.getElementById('comments-container');
 
-// Fungsi merender tampilan ucapan & memperbarui counter kehadiran
+// 2. Fungsi Utama Render Ucapan & Counter
 function renderKomentar() {
-    commentsContainer.innerHTML = '';
+    if (!commentsContainer) return;
+
+    // Proteksi Admin: Tombol hapus hanya muncul jika ada parameter ?role=admin di URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const isAdmin = urlParams.get('role') === 'admin';
+
     let totalHadir = 0;
     let totalAbsen = 0;
+    let htmlKomentar = '';
 
     dataKomentar.forEach(item => {
-        if(item.kehadiran === "Hadir") totalHadir++;
-        else totalAbsen++;
+        if (item.kehadiran === 'Hadir') {
+            totalHadir++;
+        } else if (item.kehadiran === 'Tidak Hadir') {
+            totalAbsen++;
+        }
 
-        const commentHtml = `
-            <div class="comment-item">
-                <div class="comment-header">
-                    <span class="comment-name">${item.nama}</span>
-                    <button class="btn-delete-admin" onclick="hapusKomentar(${item.id})" title="Hapus Komentar">❌</button>
-                </div>
-                <p class="comment-text">${item.ucapan}</p>
-                <div class="comment-time">${item.waktu} • <small>(${item.kehadiran})</small></div>
+        // Jika masuk sebagai admin (?role=admin), buatkan tombol silang (x) merah
+        const tombolHapus = isAdmin 
+            ? `<button onclick="hapusKomentar(${item.id})" style="position: absolute; right: 10px; top: 10px; background: none; border: none; color: #ff4d4d; font-weight: bold; cursor: pointer; font-size: 1.1rem;">×</button>` 
+            : '';
+
+        htmlKomentar += `
+            <div class="comment-item" style="border-bottom: 1px solid #eee; padding: 10px 0; margin-bottom: 10px; position: relative;">
+                <strong style="color: #333;">${item.nama}</strong> 
+                <span style="font-size: 0.8rem; padding: 2px 6px; border-radius: 4px; margin-left: 8px; 
+                background-color: ${item.kehadiran === 'Hadir' ? '#e6f0fa' : '#f8d7da'}; 
+                color: ${item.kehadiran === 'Hadir' ? '#004085' : '#721c24'};">
+                    ${item.kehadiran}
+                </span>
+                
+                ${tombolHapus}
+                
+                <p style="margin: 5px 0 0 0; color: #555;">${item.ucapan}</p>
+                <small style="color: #999; font-size: 0.75rem; display: block; margin-top: 3px;">${item.waktu || 'Baru saja'}</small>
             </div>
         `;
-        commentsContainer.innerHTML += commentHtml;
     });
 
-    document.getElementById('count-hadir').innerText = totalHadir;
-    document.getElementById('count-absen').innerText = totalAbsen;
+    // Masukkan hasil susunan ke dalam wadah HTML
+    commentsContainer.innerHTML = htmlKomentar;
+
+
+
+    // Update angka counter di tampilan HTML
+    const countHadirEl = document.getElementById('count-hadir');
+    const countAbsenEl = document.getElementById('count-absen');
+    
+    if (countHadirEl) countHadirEl.innerText = totalHadir;
+    if (countAbsenEl) countAbsenEl.innerText = totalAbsen;
 }
 
 // Handler Submit Data Baru
-formUcapan.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const nama = document.getElementById('input-nama').value;
-    const ucapan = document.getElementById('input-ucapan').value;
-    const kehadiran = document.getElementById('input-kehadiran').value;
+if (formUcapan) {
+    formUcapan.addEventListener('submit', function(e) {
+        e.preventDefault();
 
-    const dataBaru = {
-        id: Date.now(), // Generate ID unik menggunakan timestamp
-        nama: nama,
-        ucapan: ucapan,
-        kehadiran: kehadiran,
-        waktu: "Baru saja"
-    };
+        const nama = document.getElementById('input-nama').value;
+        const ucapan = document.getElementById('input-ucapan').value;
+        const kehadiran = document.getElementById('input-kehadiran').value;
 
-    dataKomentar.unshift(dataBaru); // Masukkan data baru di baris paling atas
-    renderKomentar();
-    
-    formUcapan.reset(); // Kosongkan kembali form input
-});
+        const dataBaru = {
+            id: Date.now(), // Generate ID unik menggunakan timestamp
+            nama: nama,
+            ucapan: ucapan,
+            kehadiran: kehadiran,
+            waktu: "Baru saja"
+        };
 
-// FUNGSI PENGAMANAN UTAMA (PROMPT PASSWORD ADMIN)
+        // Masukkan data baru di baris paling atas
+        dataKomentar.unshift(dataBaru);
+        
+        // Simpan data terbaru ke dalam localStorage
+        localStorage.setItem('undangan_komentar', JSON.stringify(dataKomentar));
+
+        // Render ulang komentar
+        renderKomentar();
+
+        // Kosongkan kembali form input
+        formUcapan.reset();
+    });
+}
+
+// Fungsi Hapus Komentar (Moderasi Admin)
 function hapusKomentar(id) {
     const konfirmasiSandi = prompt("Sistem Keamanan Admin:\nMasukkan password untuk menghapus komentar ini:");
-    
+
     if (konfirmasiSandi === null) {
         return; // Batalkan jika menekan tombol cancel
     }
-    
+
     if (konfirmasiSandi === ADMIN_PASSWORD) {
+        // Filter data untuk membuang komentar berdasarkan ID
         dataKomentar = dataKomentar.filter(item => item.id !== id);
+        
+        // Simpan perubahan ke memori browser
+        localStorage.setItem('undangan_komentar', JSON.stringify(dataKomentar));
+        
+        // Render ulang tampilan komentar
         renderKomentar();
+        
         alert("Komentar berhasil dihapus oleh Admin.");
     } else {
         alert("Akses Ditolak! Password Admin salah.");
     }
 }
 
-// Inisialisasi awal saat halaman dimuat
-document.addEventListener("DOMContentLoaded", function() {
-    renderKomentar();
-});
 function bukaUndangan() {
     const entrance = document.getElementById('entrance-screen');
     const main = document.getElementById('main-content');
@@ -583,6 +625,27 @@ if (namaTamu) {
     const namaBersih = namaTamu.replace(/\+/g, ' '); 
     document.getElementById('nama-tamu').innerText = namaBersih;
 }
+// ==========================================================================
+// EVENT LISTENER UNTUK MENAMPILKAN KOMENTAR SEJAK AWAL
+// ==========================================================================
+
+// Trik Jitu: Jika localStorage kosong atau isinya tidak valid, paksa pakai komentar bawaan
+if (!localStorage.getItem('undangan_komentar') || JSON.parse(localStorage.getItem('undangan_komentar')).length === 0) {
+    localStorage.setItem('undangan_komentar', JSON.stringify(komentarBawaan));
+    dataKomentar = komentarBawaan;
+}
+
+// Jalankan fungsi render langsung agar komentar dan counter langsung muncul tanpa loading lama
+renderKomentar();
+
+// Pastikan terpanggil kembali setelah seluruh struktur halaman selesai dimuat browser
+document.addEventListener("DOMContentLoaded", function() {
+    renderKomentar();
+    if (typeof handleScrollReveal === "function") {
+        handleScrollReveal();
+    }
+});
+
 
     </script>
 </body>
