@@ -120,24 +120,9 @@
     font-weight: 600;
 }
 
-/* --- 2. MAIN CONTAINER (UPDATE TEMA AWAN PUTIH MERONA) --- */
-.main-container {
-    width: 100%;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    background: 
-        radial-gradient(circle at 20% 30%, rgba(255, 235, 235, 0.6) 0%, transparent 40%),
-        radial-gradient(circle at 80% 70%, rgba(255, 225, 225, 0.5) 0%, transparent 50%),
-        linear-gradient(135deg, #fbfbfb 0%, #fffefe 50%, #f7e9e9 100%);
-    background-attachment: fixed;
-    opacity: 0;
-    transition: opacity 1s ease;
-}
 
-/* --- 2. MAIN CONTAINER & COVER MODEL BARU --- */
+
+* --- 2. MAIN CONTAINER & COVER MODEL BARU --- */
 .main-container {
     width: 100%;
     min-height: 100vh;
@@ -1231,6 +1216,43 @@ body .doa-card {
     margin-top: 0 !important;
     padding-top: 0 !important;
 }
+/* ==================== MEMBUAT BACKGROUND MENYATU DARI AWAL-AKHIR ==================== */
+
+/* 1. Atur Gradasi Raksasa yang Mengalir Lembut di Container Utama */
+body .main-container {
+    background: linear-gradient(
+        180deg, 
+        #e6f0fa 0%,    /* Biru pastel lembut di bagian pembuka */
+        #ffffff 20%,   /* Putih bersih di area Doa */
+        #ffefe9 50%,   /* Pink merona hangat di area Profil & Story */
+        #ffffff 80%,   /* Kembali putih bersih di seksi Lokasi */
+        #e6f0fa 100%   /* Biru pastel penutup di seksi Galeri/Footer */
+    ) !important;
+    background-attachment: scroll !important; /* Membuat gradasi mengalir alami saat di-scroll */
+    background-size: 100% 100% !important;
+}
+
+/* 2. Buat Semua Seksi/Halaman Menjadi Transparan */
+/* Ini agar gradasi raksasa di atas bisa menembus dan terlihat dari atas sampai bawah */
+body .page-section, 
+body section, 
+body .countdown-section,
+body .story-section,
+body .location-section,
+body .gallery-section {
+    background: transparent !important;
+}
+
+/* 3. Buat Kartu Doa Menjadi Transparan Mewah (Frosted Glass) */
+/* Agar tidak memotong gradasi, tapi tetap terlihat seperti kartu melayang */
+body .doa-card {
+    background: rgba(255, 255, 255, 0.4) !important; /* Sangat transparan */
+    backdrop-filter: blur(10px) !important; /* Efek blur kaca blur di belakangnya */
+    -webkit-backdrop-filter: blur(10px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.6) !important;
+    box-shadow: 0 15px 35px rgba(225, 215, 205, 0.2) !important;
+}
+
 
 
 

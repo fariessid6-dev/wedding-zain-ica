@@ -503,15 +503,21 @@ function handleScrollReveal() {
         const revealTop = reveal.getBoundingClientRect().top;
         const revealBottom = reveal.getBoundingClientRect().bottom;
 
-        // Kondisi 1: Jika elemen masuk ke dalam area layar dari bawah (Scroll ke bawah)
-        // Kondisi 2: Jika elemen masih berada di dalam area layar dari atas (Scroll ke atas)
-        if (revealTop < windowHeight - revealPoint && revealBottom > revealPoint) {
+        /* KONDISI YANG DIUPDATE:
+           - Batas bawah: Muncul saat discroll ke bawah (revealTop < windowHeight - revealPoint)
+           - Batas atas: Hilang/muncul tepat waktu saat discroll ke atas (revealBottom > 0)
+        */
+        if (revealTop < (windowHeight - revealPoint) && revealBottom > 0) {
             reveal.classList.add('active');
         } else {
-            // EFEK REVERSE: Menghapus kelas 'active' saat elemen keluar dari layar
+            // Menghapus kelas 'active' secara instan begitu elemen keluar ke atas atau ke bawah layar
             reveal.classList.remove('active');
         }
+
+        // Kondisi 1: Jika elemen masuk ke dalam area layar dari bawah (Scroll ke bawah)
+        // Kondisi 2: Jika elemen masih berada di dalam area layar dari atas (Scroll ke atas)
     });
+  
 }
 
 // Jalankan fungsi saat jendela di-scroll
