@@ -6,6 +6,7 @@
     <title>Undangan Pernikahan Zainus & Ica</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    
 </head>
 <body>
 
@@ -372,41 +373,43 @@
 
     </div>
 
-    <script>
+
+<!-- Load Firebase SDK dari CDN -->
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-database-compat.js"></script>
+
+<script>
 // ==========================================================================
-// 1. SISTEM MANAGEMENT BUKU TAMU, STORAGE, & MODERASI ADMIN
+// 1. KONFIGURASI FIREBASE RESMI MILIKMU
 // ==========================================================================
+const firebaseConfig = {
+    apiKey: "AIzaSyDL3nPp52bYePvIfsLzA2JtsL6hAARkRT4",
+    authDomain: "weding-zain.firebaseapp.com",
+    databaseURL: "https://weding-zain-default-rtdb.asia-southeast1.firebasedatabase.app", 
+    projectId: "weding-zain",
+    storageBucket: "weding-zain.appstorage.app",
+    messagingSenderId: "663358397404",
+    appId: "1:663358397404:web:2b88cb6cf156cdb0a60d19",
+    measurementId: "G-3RBEQTKYWL"
+};
+
+// Inisialisasi Firebase
+firebase.initializeApp(firebaseConfig);
+const database = firebase.database();
+
 const ADMIN_PASSWORD = "bismillahica";
-
-// Komentar bawaan jika memori browser (localStorage) masih kosong
-const komentarBawaan = [
-    { 
-        id: 1, 
-        nama: "Cati", 
-        ucapan: "Masya Allah, selamat Ica ❤️. Semoga dilancarkan segala urusannya, Sakinah Mawaddah Warahmah 🌹.", 
-        kehadiran: "Tidak Hadir", 
-        waktu: "Baru saja" 
-    },
-    { 
-        id: 2, 
-        nama: "Kity", 
-        ucapan: "Wihh selamat yah kak, lancar terus sampai hari-H. Bahagia selalu buat kalian berdua 🥰", 
-        kehadiran: "Hadir", 
-        waktu: "1 jam lalu" 
-    }
-];
-
-// Ambil data dari localStorage, jika kosong gunakan komentarBawaan
-let dataKomentar = JSON.parse(localStorage.getItem('undangan_komentar')) || komentarBawaan;
-
 const formUcapan = document.getElementById('form-ucapan');
 const commentsContainer = document.getElementById('comments-container');
+const countHadirEl = document.getElementById('count-hadir');
+const countAbsenEl = document.getElementById('count-absen');
 
-// 2. Fungsi Utama Render Ucapan & Counter
-function renderKomentar() {
+// ==========================================================================
+// 2. FUNGSI UNTUK MERENDER UCAPAN (REALTIME DARI SERVER)
+// ==========================================================================
+database.ref('komentar').on('value', (snapshot) => {
     if (!commentsContainer) return;
-
-    // Proteksi Admin: Tombol hapus hanya muncul jika ada parameter ?role=admin di URL
+    
+    const data = snapshot.val();
     const urlParams = new URLSearchParams(window.location.search);
     const isAdmin = urlParams.get('role') === 'admin';
 
@@ -414,49 +417,44 @@ function renderKomentar() {
     let totalAbsen = 0;
     let htmlKomentar = '';
 
-    dataKomentar.forEach(item => {
-        if (item.kehadiran === 'Hadir') {
-            totalHadir++;
-        } else if (item.kehadiran === 'Tidak Hadir') {
-            totalAbsen++;
-        }
+    if (data) {
+        const keys = Object.keys(data).reverse();
+        
+        keys.forEach((key) => {
+            const item = data[key];
+            
+            if (item.kehadiran === 'Hadir') totalHadir++;
+            if (item.kehadiran === 'Tidak Hadir') totalAbsen++;
 
-        // Jika masuk sebagai admin (?role=admin), buatkan tombol silang (x) merah
-        const tombolHapus = isAdmin 
-            ? `<button onclick="hapusKomentar(${item.id})" style="position: absolute; right: 10px; top: 10px; background: none; border: none; color: #ff4d4d; font-weight: bold; cursor: pointer; font-size: 1.1rem;">×</button>` 
-            : '';
+            const tombolHapus = isAdmin 
+                ? `<button onclick="hapusKomentar('${key}')" style="position: absolute; right: 10px; top: 10px; background: none; border: none; color: #ff4d4d; font-weight: bold; cursor: pointer; font-size: 1.1rem;">×</button>` 
+                : '';
 
-        htmlKomentar += `
-            <div class="comment-item" style="border-bottom: 1px solid #eee; padding: 10px 0; margin-bottom: 10px; position: relative;">
-                <strong style="color: #333;">${item.nama}</strong> 
-                <span style="font-size: 0.8rem; padding: 2px 6px; border-radius: 4px; margin-left: 8px; 
-                background-color: ${item.kehadiran === 'Hadir' ? '#e6f0fa' : '#f8d7da'}; 
-                color: ${item.kehadiran === 'Hadir' ? '#004085' : '#721c24'};">
-                    ${item.kehadiran}
-                </span>
-                
-                ${tombolHapus}
-                
-                <p style="margin: 5px 0 0 0; color: #555;">${item.ucapan}</p>
-                <small style="color: #999; font-size: 0.75rem; display: block; margin-top: 3px;">${item.waktu || 'Baru saja'}</small>
-            </div>
-        `;
-    });
+            htmlKomentar += `
+                <div class="comment-item" style="border-bottom: 1px solid #eee; padding: 10px 0; margin-bottom: 10px; position: relative;">
+                    <strong style="color: #333;">${item.nama}</strong> 
+                    <span style="font-size: 0.8rem; padding: 2px 6px; border-radius: 4px; margin-left: 8px; 
+                    background-color: ${item.kehadiran === 'Hadir' ? '#e6f0fa' : '#f8d7da'}; 
+                    color: ${item.kehadiran === 'Hadir' ? '#004085' : '#721c24'};">
+                        ${item.kehadiran}
+                    </span>
+                    ${tombolHapus}
+                    <p style="margin: 5px 0 0 0; color: #555;">${item.ucapan}</p>
+                    <small style="color: #999; font-size: 0.75rem; display: block; margin-top: 3px;">Baru saja</small>
+                </div>
+            `;
+        });
+    }
 
-    // Masukkan hasil susunan ke dalam wadah HTML
-    commentsContainer.innerHTML = htmlKomentar;
-
-
-
-    // Update angka counter di tampilan HTML
-    const countHadirEl = document.getElementById('count-hadir');
-    const countAbsenEl = document.getElementById('count-absen');
-    
     if (countHadirEl) countHadirEl.innerText = totalHadir;
     if (countAbsenEl) countAbsenEl.innerText = totalAbsen;
-}
+    
+    commentsContainer.innerHTML = htmlKomentar || '<p style="color:#999; text-align:center;">Belum ada ucapan.</p>';
+});
 
-// Handler Submit Data Baru
+// ==========================================================================
+// 3. HANDLER SUBMIT DATA TAMU BARU KE SERVER
+// ==========================================================================
 if (formUcapan) {
     formUcapan.addEventListener('submit', function(e) {
         e.preventDefault();
@@ -465,51 +463,32 @@ if (formUcapan) {
         const ucapan = document.getElementById('input-ucapan').value;
         const kehadiran = document.getElementById('input-kehadiran').value;
 
-        const dataBaru = {
-            id: Date.now(), // Generate ID unik menggunakan timestamp
+        database.ref('komentar').push({
             nama: nama,
             ucapan: ucapan,
-            kehadiran: kehadiran,
-            waktu: "Baru saja"
-        };
+            kehadiran: kehadiran
+        });
 
-        // Masukkan data baru di baris paling atas
-        dataKomentar.unshift(dataBaru);
-        
-        // Simpan data terbaru ke dalam localStorage
-        localStorage.setItem('undangan_komentar', JSON.stringify(dataKomentar));
-
-        // Render ulang komentar
-        renderKomentar();
-
-        // Kosongkan kembali form input
         formUcapan.reset();
     });
 }
 
-// Fungsi Hapus Komentar (Moderasi Admin)
-function hapusKomentar(id) {
+// ==========================================================================
+// 4. FUNGSI HAPUS KOMENTAR UNTUK ADMIN
+// ==========================================================================
+function hapusKomentar(key) {
     const konfirmasiSandi = prompt("Sistem Keamanan Admin:\nMasukkan password untuk menghapus komentar ini:");
-
-    if (konfirmasiSandi === null) {
-        return; // Batalkan jika menekan tombol cancel
-    }
+    if (konfirmasiSandi === null) return;
 
     if (konfirmasiSandi === ADMIN_PASSWORD) {
-        // Filter data untuk membuang komentar berdasarkan ID
-        dataKomentar = dataKomentar.filter(item => item.id !== id);
-        
-        // Simpan perubahan ke memori browser
-        localStorage.setItem('undangan_komentar', JSON.stringify(dataKomentar));
-        
-        // Render ulang tampilan komentar
-        renderKomentar();
-        
-        alert("Komentar berhasil dihapus oleh Admin.");
+        database.ref('komentar/' + key).remove();
+        alert("Komentar berhasil dihapus dari server.");
     } else {
         alert("Akses Ditolak! Password Admin salah.");
     }
 }
+
+
 
 function bukaUndangan() {
     const entrance = document.getElementById('entrance-screen');
