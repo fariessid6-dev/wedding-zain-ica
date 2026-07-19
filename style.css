@@ -99,13 +99,13 @@
     height: 110px;
     border-radius: 50%;
     background-color: var(--putih-bersih);
-    border: 3px solid var(--warna-emas);
+    border: 3px solid rgba(251, 235, 235, 1);
     font-family: 'Cinzel', serif;
     font-size: 26px;
     font-weight: bold;
     color: #1A2E40;
     cursor: pointer;
-    box-shadow: 0 0 25px rgba(26, 46, 64, 0.15), 0 0 10px rgba(212, 175, 55, 0.3);
+    box-shadow: 0 0 25px rgba(251, 235, 235, 1), 0 0 10px color:#fbebeb;
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
@@ -1263,6 +1263,177 @@ body .doa-card {
 .btn-delete-admin {
     display: none !important;
 }
+
+/* 1. Container Foto Utama */
+.hero-container {
+    position: relative;
+    overflow: hidden;
+    /* Pastikan tidak ada margin bawah yang mengganggu */
+    margin-bottom: 0;
+}
+
+/* 2. Area Teks di Bawahnya (Pastikan warna background sama dengan SVG) */
+.content-container {
+    background-color: #Fbebeb; /* Harus sama dengan warna fill di SVG */
+    
+    /* Tambahkan padding atas agar teks tidak tertutup puncak lengkungan */
+    padding-top: 60px; /* Sesuaikan nilainya (50px - 80px) agar pas */
+    
+    /* Pastikan konten berada di atas lengkungan jika perlu */
+    position: relative;
+    z-index: 1;
+}
+
+/* 3. Atur Responsivitas Lengkungan (Opsional tapi direkomendasikan) */
+@media (max-width: 768px) {
+    /* Untuk HP, kita pendekkan sedikit tinggi lengkungannya agar tidak terlalu makan tempat */
+    .wave-divider svg {
+        height: 50px !important;
+    }
+    .content-container {
+        padding-top: 40px; /* Sesuaikan juga padding konten untuk HP */
+    }
+}
+.ornamen-undangan {
+  position: fixed;
+  
+  /* 1. POSISI: Tarik lebih dalam ke pojok kanan bawah luar layar */
+  bottom: -65px;       /* Diturunkan lebih banyak agar pangkal batang tersembunyi */
+  right: -20px;        /* Digeser lebih kanan agar tidak terlalu ke tengah */
+  
+  /* 2. UKURAN: Diperkecil sedikit agar tidak mendominasi layar portrait */
+  width: 30%;         
+  height: auto;
+  
+  /* 3. ROTASI DEFAULT */
+  transform: rotate(-28deg);
+  transform-origin: center center;
+ filter: invert(86%) sepia(13%) saturate(1472%) brightness(103%) contrast(102%) hue-rotate(305deg);
+
+
+
+  z-index: 4;
+  display: block;
+  pointer-events: none;
+}
+
+/* --- OPTIMASI KHUSUS MODE LANDSCAPE --- */
+@media (orientation: landscape)  {
+  .ornamen-undangan {
+    width: 12vw; /* Menggunakan lebar relatif viewport yang lebih kecil */
+    bottom: -75px;
+    right: -20px; /* <--- Hapus titik dua ganda (::) di kode kamu agar tidak error */
+  }
+}
+
+
+.ornamen2 {
+  position: fixed;
+  
+  /* 1. POSISI: Tarik lebih dalam ke pojok kanan bawah luar layar */
+  bottom: -65px;       /* Diturunkan lebih banyak agar pangkal batang tersembunyi */
+  left:-20px;        /* Digeser lebih kanan agar tidak terlalu ke tengah */
+  
+  /* 2. UKURAN: Diperkecil sedikit agar tidak mendominasi layar portrait */
+  width: 30%;         
+  height: auto;
+  
+  /* 3. ROTASI DEFAULT */
+  transform: scalex(-1) rotate(-28deg);
+  transform-origin: center center;
+ filter: invert(86%) sepia(13%) saturate(1472%) brightness(103%) contrast(102%) hue-rotate(305deg);
+
+
+
+  z-index: 4;
+  display: block;
+  pointer-events: none;
+}
+
+@media (orientation: landscape)  {
+  .ornamen2 {
+    width: 12vw; 
+    bottom: -75px;
+    left: -20px;
+  }
+}
+
+.ornamen3 {
+  position: fixed;
+  
+  /* 1. POSISI: Tarik lebih dalam ke pojok kanan bawah luar layar */
+  top: -65px;       /* Diturunkan lebih banyak agar pangkal batang tersembunyi */
+  right:-20px;        /* Digeser lebih kanan agar tidak terlalu ke tengah */
+  
+  /* 2. UKURAN: Diperkecil sedikit agar tidak mendominasi layar portrait */
+  width: 30%;         
+  height: auto;
+  
+  /* 3. ROTASI DEFAULT */
+  transform: scaley(-1) rotate(-28deg);
+  transform-origin: center center;
+ filter: invert(86%) sepia(13%) saturate(1472%) brightness(103%) contrast(102%) hue-rotate(305deg);
+
+  z-index: 4;
+  display: block;
+  pointer-events: none;
+}
+/* --- OPTIMASI KHUSUS MODE LANDSCAPE --- */
+@media (orientation: landscape)  {
+  .ornamen3 {
+    width: 12vw; 
+    top: -75px;
+    right:-20px;
+  }
+}
+
+
+.ornamen4 {
+  position: fixed;
+  
+  /* 1. POSISI: Tarik lebih dalam ke pojok kanan bawah luar layar */
+  top: -65px;       /* Diturunkan lebih banyak agar pangkal batang tersembunyi */
+  left:-20px;        /* Digeser lebih kanan agar tidak terlalu ke tengah */
+  
+  /* 2. UKURAN: Diperkecil sedikit agar tidak mendominasi layar portrait */
+  width: 30%;         
+  height: auto;
+  
+  /* 3. ROTASI DEFAULT */
+  transform: scalex(-1) scaley(-1) rotate(-28deg);
+  transform-origin: center center;
+ filter: invert(86%) sepia(13%) saturate(1472%) brightness(103%) contrast(102%) hue-rotate(305deg);
+
+  z-index: 4;
+  display: block;
+  pointer-events: none;
+}
+/* --- OPTIMASI KHUSUS MODE LANDSCAPE --- */
+@media (orientation: landscape)  {
+  .ornamen4 {
+    width: 12vw; 
+    top: -75px;
+    left: -20px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
