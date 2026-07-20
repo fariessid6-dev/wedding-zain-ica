@@ -105,9 +105,24 @@
     font-weight: bold;
     color: #1A2E40;
     cursor: pointer;
-    box-shadow: 0 0 25px rgba(251, 235, 235, 1), 0 0 10px color:#fbebeb;
+    box-shadow: 0 0 25px rgba(251, 235, 235, 1), 0 0 10px color:#e6f0fa;
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    opacity: 0; /* Sembunyikan logo di awal */
+  animation: logoMasuk 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  animation-delay: 1.3s; /* Muncul paling akhir setelah semua bunga beres */
 }
+/* KEYFRAMES UNTUK LOGO MASUK PALING AKHIR */
+@keyframes logoMasuk {
+  from {
+    opacity: 0;
+    transform: scale(0.5); /* Muncul mengecil dari dalam */
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);   /* Kembali ke ukuran asli */
+  }
+}
+
 
 .logo-initial:hover { transform: scale(1.08); }
 
@@ -118,7 +133,21 @@
     letter-spacing: 3px;
     text-transform: uppercase;
     font-weight: 600;
+    animation: logoinfo 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  animation-delay: 1.3s; 
+  opacity: 0;
 }
+@keyframes logoinfo {
+  from {
+    opacity: 0;
+    transform: scale(0.5); /* Muncul mengecil dari dalam */
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);   /* Kembali ke ukuran asli */
+  }
+}
+
 
 
 
@@ -1416,6 +1445,165 @@ body .doa-card {
     left: -20px;
   }
 }
+/* 1. ANIMASI UTAMA UNTUK ORNAMEN */
+@keyframes ornamenMasuk {
+  from {
+    opacity: 0;
+    transform: scale(0.6); /* Muncul dari kecil */
+  }
+  to {
+    opacity: 1;
+  }
+}
+.ornamen5 {
+  position: absolute;
+  
+  /* 1. POSISI: Tarik lebih dalam ke pojok kanan bawah luar layar */
+  bottom: 20px;       /* Diturunkan lebih banyak agar pangkal batang tersembunyi */
+  right:   20px;        /* Digeser lebih kanan agar tidak terlalu ke tengah */
+  
+  /* 2. UKURAN: Diperkecil sedikit agar tidak mendominasi layar portrait */
+  width: 30%;         
+  height: auto;
+  
+  /* 3. ROTASI DEFAULT */
+  transform: rotate(-25deg);
+  transform-origin: center center;
+ filter: invert(88%) sepia(20%) saturate(280%) brightness(80%) contrast(97%) hue-rotate(185deg);
+
+  z-index: 4;
+  display: block;
+  pointer-events: none;
+}
+@media (orientation: landscape)  {
+  .ornamen5 {
+    width: 10vw; /* Menggunakan lebar relatif viewport yang lebih kecil */
+    bottom: 20px;
+    right: -5px; /* <--- Hapus titik dua ganda (::) di kode kamu agar tidak error */
+  }
+}
+.ornamen6{
+  position: fixed;
+  
+  /* 1. POSISI: Tarik lebih dalam ke pojok kanan bawah luar layar */
+  bottom: -65px;       /* Diturunkan lebih banyak agar pangkal batang tersembunyi */
+  right: -20px;        /* Digeser lebih kanan agar tidak terlalu ke tengah */
+  
+  /* 2. UKURAN: Diperkecil sedikit agar tidak mendominasi layar portrait */
+  width: 30%;         
+  height: auto;
+  
+  /* 3. ROTASI DEFAULT */
+  transform: rotate(-35deg);
+  transform-origin: center center;
+   filter: invert(88%) sepia(20%) saturate(280%) brightness(80%) contrast(97%) hue-rotate(185deg);
+ 
+
+  z-index: 4;
+  display: block;
+  pointer-events: none;
+}
+
+/* --- OPTIMASI KHUSUS MODE LANDSCAPE --- */
+@media (orientation: landscape)  {
+  .ornamen6 {
+    width: 12vw; /* Menggunakan lebar relatif viewport yang lebih kecil */
+    bottom: -75px;
+    right: -20px; /* <--- Hapus titik dua ganda (::) di kode kamu agar tidak error */
+  }
+}
+.ornamen7 {
+  position: fixed;
+  
+  /* 1. POSISI: Tarik lebih dalam ke pojok kanan bawah luar layar */
+  top: -65px;       /* Diturunkan lebih banyak agar pangkal batang tersembunyi */
+  left:-20px;        /* Digeser lebih kanan agar tidak terlalu ke tengah */
+  
+  /* 2. UKURAN: Diperkecil sedikit agar tidak mendominasi layar portrait */
+  width: 30%;         
+  height: auto;
+  
+  /* 3. ROTASI DEFAULT */
+  transform: scalex(-1) scaley(-1) rotate(-35deg);
+  transform-origin: center center;
+   filter: invert(88%) sepia(20%) saturate(280%) brightness(80%) contrast(97%) hue-rotate(185deg);
+ 
+
+  z-index: 4;
+  display: block;
+  pointer-events: none;
+}
+/* --- OPTIMASI KHUSUS MODE LANDSCAPE --- */
+@media (orientation: landscape)  {
+  .ornamen7 {
+    width: 12vw; 
+    top: -75px;
+    left: -20px;
+  }
+}
+
+
+/* --- OPTIMASI KHUSUS MODE LANDSCAPE --- */
+
+
+/* 2. ATUR ULANG KONDISI AWAL SETIAP ORNAMEN (Tambahkan properti transition dan animation) */
+/* 1. KUNCI CONDITIONAL AWAL (Agar tidak muncul duluan sebelum animasi jalan) */
+.ornamen-undangan, .ornamen2, .ornamen3, .ornamen4, .ornamen5, .ornamen6,.ornamen7 {
+  opacity: 0; /* Wajib diset 0 di sini agar tersembunyi saat pertama dimuat */
+  
+  /* Transisi dinamis saat klik tombol buka */
+  transition: transform 1.5s cubic-bezier(0.25, 1, 0.5, 1), opacity 1.2s ease;
+  
+  /* Jalankan animasi awal */
+  animation: ornamenMasuk 1.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
+
+/* 2. JEDA WAKTU MUNCUL (Delay satu per satu tetap sama) */
+.ornamen-undangan { animation-delay: 0.3s; }
+.ornamen2         { animation-delay: 0.5s; }
+.ornamen3         { animation-delay: 0.7s; }
+.ornamen4         { animation-delay: 0.9s; }
+.ornamen7         { animation-delay: 0.9s; }
+.ornamen5         { animation-delay: 1s; }
+.ornamen6         { animation-delay: 0.3s; }
+/* 3. ANIMASI UTAMA NYA */
+@keyframes ornamenMasuk {
+  from {
+    opacity: 0;
+    transform: scale(0.6); 
+  }
+  to {
+    opacity: 1;
+    /* Jangan tambahkan transform di sini agar tidak menimpa / merusak 
+       efek rotate(-28deg) atau scaleX(-1) yang ada di setelan dasarmu! */
+  }
+}
+
+
+/* Ornamen 1 (Pojok Kanan Bawah) -> Geser ke Kanan Bawah */
+.entrance-container.fade-out .ornamen-undangan {
+  transform: translate(100%, 100%) scale(0.7);
+  opacity: 0;
+}
+
+/* Ornamen 2 (Pojok Kiri Bawah) -> Geser ke Kiri Bawah */
+.entrance-container.fade-out .ornamen2 {
+  transform: translate(-100%, 100%) scale(0.7);
+  opacity: 0;
+}
+
+/* Ornamen 3 (Pojok Kanan Atas) -> Geser ke Kanan Atas */
+.entrance-container.fade-out .ornamen3 {
+  transform: translate(100%, -100%) scale(0.7);
+  opacity: 0;
+}
+
+/* Ornamen 4 (Pojok Kiri Atas) -> Geser ke Kiri Atas */
+.entrance-container.fade-out .ornamen4 {
+  transform: translate(-100%, -100%) scale(0.7);
+  opacity: 0;
+}
+
 
 
 
