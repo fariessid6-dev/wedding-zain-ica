@@ -7,7 +7,9 @@
     <title>Undangan Pernikahan Zainus & Ica</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
-    
+    <!-- Font Awesome untuk Ikon Navbar -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 </head>
 <body>
 
@@ -52,8 +54,8 @@
                 <p class="greetings-text">THE WEDDING OF</p>
                 <h1 class="couple-names-cover">Zain & Ica</h1>
                 
-                <p class="guest-label">Kepada Bapak/Ibu/Saudara/i</p>
-                <h3 class="guest-name" id="nama-tamu">Nama Tamu Undangan</h3>
+                <p class="guest-label">Kepada Bapak/Ibu/Saudara/i;</p>
+                <h3 class="guest-name" id="nama-tamu"></h3>
                 
                 <audio id="wedding-music" loop>
                     <source src="heavensong.mp3" type="audio/mpeg">
@@ -166,7 +168,7 @@
                     <div class="flower-ornament-left scroll-reveal">🌸</div>
                 </div>
                 
-                <h2 class="nama-lengkap-mempelai scroll-reveal">Ica Mulyati</h2>
+                <h2 class="nama-lengkap-mempelai scroll-reveal">Ica Mulyati,S.M</h2>
                 <p class="orang-tua scroll-reveal">Putri dari Bapak Kumpul Mulyono & Ibu Qoyimah</p>
                 
                 <!-- Tombol Instagram Sosmed -->
@@ -223,7 +225,7 @@
                 </div>
 
             </div> </div> </div>
-  <div class="event-card-main scroll-reveal">
+  <div id= "card-main" class="event-card-main scroll-reveal">
                 
                 <!-- Foto Lanskap Acara -->
                 <div class="event-photo-frame">
@@ -651,9 +653,43 @@ document.addEventListener("DOMContentLoaded", function() {
         handleScrollReveal();
     }
 });
+const navItems = document.querySelectorAll('.bottom-navbar .nav-item');
+
+navItems.forEach(item => {
+    item.addEventListener('click', function() {
+        // Hapus kelas 'active' dari semua tombol
+        navItems.forEach(nav => nav.classList.remove('active'));
+        // Tambahkan kelas 'active' pada tombol yang baru saja diklik
+        this.classList.addClass ? this.classList.add('active') : this.className += ' active';
+    });
+});
 
 
     </script>
+    <!-- FLOATING TOOLBAR / NAVBAR BOTTOM -->
+<nav class="bottom-navbar">
+    <a href="#cover" class="nav-item active">
+        <i class="fa-solid fa-heart"></i>
+        <span>Home</span>
+    </a>
+    <a href="#mempelai-section" class="nav-item">
+        <i class="fa-solid fa-user-group"></i>
+        <span>Mempelai</span>
+    </a>
+    <a href="#card-main" class="nav-item">
+        <i class="fa-solid fa-calendar-days"></i>
+        <span>Acara</span>
+    </a>
+    <a href="#gallery-section" class="nav-item">
+        <i class="fa-solid fa-images"></i>
+        <span>Galeri</span>
+    </a>
+    <a href="#wishes-section" class="nav-item">
+        <i class="fa-solid fa-pen-to-square"></i>
+        <span>Ucapan</span>
+    </a>
+</nav>
+
 </body>
 </html>
 
