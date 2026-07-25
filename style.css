@@ -373,7 +373,26 @@
 .doa-ornament-top { font-size: 24px; color: var(--warna-emas); margin-bottom: 15px; }
 .doa-title { font-family: 'Cinzel', serif; color: #b58d63; font-size: 20px; font-weight: 700; margin-bottom: 30px; }
 .doa-arabic { font-size: 22px; line-height: 2; color: #1f0303; margin-bottom: 20px; direction: rtl; font-family: 'Times New Roman', serif; }
-.doa-translation { font-size: 12.5px; font-style: italic; color: #555; line-height: 1.6; margin-bottom: 10px; }
+.doa-translation { 
+  font-size: 12.5px; 
+  font-style: italic; 
+  color: #555;
+  line-height: 1.6; 
+  margin-bottom: 10px; }
+.doa-source {
+   font-size: 12.5px; 
+  font-style: italic; 
+  color: #555;
+  line-height: 1.6; 
+  margin-bottom: 10px;
+}
+.doa-hope {
+   font-size: 14px; 
+  font-style: italic; 
+  color: #fffffff;
+  line-height: 1.6; 
+  margin-bottom: 10px;
+}
 ... [KODE SISA SAMA SEPERTI DI PROGRES TERDAHULU] ...
 
 .countdown-container {
@@ -392,22 +411,7 @@
 .countdown-title { font-family: 'Cinzel', serif; color: #b58d63 ; font-size: 22px; font-weight: 700; margin-bottom: 10px; letter-spacing: 2px; text-align:center; }
 .wedding-date { font-family: 'Montserrat', sans-serif; font-size: 14px; color: #666; font-weight: 600; margin-bottom: 30px; text-align:center; }
 .countdown-wrapper { display: flex; justify-content: space-between; gap: 10px; margin-bottom: 30px; }
-.countdown-item { 
-    flex: 1; 
-    min-width: 65px; /* Menjaga lebar kotak tetap konsisten & tidak gepeng */
-    background: linear-gradient(135deg, #ffffff 0%, #fff5f5 100%); 
-    padding: 12px 8px; /* Sedikit memperlebar jarak padding kiri-kanan */
-    border-radius: 12px; 
-    border: 1px solid rgba(166, 38, 38, 0.15); 
-    box-shadow: 10px 25px rgba(0, 0, 0, 0.03); 
-    
-    /* KUNCI PRESISI: Mengatur isi di dalam kotak agar selalu di tengah */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center; 
-}
+
 .countdown-number { 
     display: block; 
     font-family: 'Cinzel', serif; 
@@ -875,7 +879,7 @@
 
 .wishes-subtitle {
     font-size: 13px;
-    color: #b58d63;
+    color: #555555;
     text-align: center;
     margin-bottom: 25px;
     opacity: 0.9;
@@ -970,7 +974,7 @@
 .btn-send-wishes {
     padding: 12px;
      background: linear-gradient(135deg, #e6f0fa 0%, #fdfdfd 50%, #fbebeb 100%);
-    color: #ffffff;
+    color: #555555;
     border: none;
     border-radius: 6px;
     font-weight: 500;
@@ -979,7 +983,9 @@
     transition: background 0.3s;
 }
 
-.btn-send-wishes:hover { background: linear-gradient(135deg, #e6f0fa 0%, #fdfdfd 50%, #fbebeb 100%); }
+.btn-send-wishes:hover { 
+  color :#555555;
+  background: linear-gradient(135deg, #e6f0fa 0%, #fdfdfd 50%, #fbebeb 100%); }
 
 /* List Komentar */
 .comments-list {
@@ -1666,6 +1672,104 @@ body .doa-card {
 html {
     scroll-behavior: smooth;
 }
+/* Kontainer utama menggunakan Flexbox sejajar horizontal */
+.flower {
+    display: flex;
+    align-items: center;      /* Menyejajarkan posisi vertikal ke tengah */
+    justify-content: center; /* Mengetengahkan seluruh elemen */
+    gap: 15px;               /* Jarak antar kolom dan bunga */
+    width: 250px;        /* Batas lebar agar pas di layar */
+    margin: 20px auto;       /* Posisi rata tengah */
+    padding: 0 10px;
+}
+
+/* Kolom Kiri & Kanan (Menumpuk 2 kotak secara vertikal) */
+
+@media (max-width: 380px) {
+    .countdown-flower-container {
+        gap: 8px;
+    }
+    .flower-orna {
+        width: 30%;
+    }
+}
+.countdown-hari { 
+    flex: 1; 
+    width: 70px; 
+    margin: auto;/* Menjaga lebar kotak tetap konsisten & tidak gepeng */
+    height: auto;
+    background: linear-gradient(135deg, #ffffff 0%, #fff5f5 100%); 
+    padding: 8px 8px; /* Sedikit memperlebar jarak padding kiri-kanan */
+    border-radius: 40px; 
+    border: 1px solid rgba(166, 38, 38, 0.15); 
+    box-shadow: 10px 25px rgba(0, 0, 0, 0.03); 
+    
+    /* KUNCI PRESISI: Mengatur isi di dalam kotak agar selalu di tengah */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center; 
+}
+.countdown-jam { 
+    flex: 1; 
+    width: 70px; 
+    margin: auto;/* Menjaga lebar kotak tetap konsisten & tidak gepeng */
+    height: auto;
+    background: linear-gradient(135deg, #ffffff 0%, #fff5f5 100%); 
+    padding: 8px 8px; /* Sedikit memperlebar jarak padding kiri-kanan */
+    border-radius: 40px; 
+    border: 1px solid rgba(166, 38, 38, 0.15); 
+    box-shadow: 10px 25px rgba(0, 0, 0, 0.03); 
+    
+    /* KUNCI PRESISI: Mengatur isi di dalam kotak agar selalu di tengah */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center; 
+}
+/* Hilangkan background, border, dan bayangan dari kotak pembungkus */
+.countdown-menit { 
+    flex: 1; 
+    width: 70px; 
+    margin: auto;/* Menjaga lebar kotak tetap konsisten & tidak gepeng */
+    height: auto;
+    background: linear-gradient(135deg, #ffffff 0%, #fff5f5 100%); 
+    padding: 8px 8px; /* Sedikit memperlebar jarak padding kiri-kanan */
+    border-radius: 40px; 
+    border: 1px solid rgba(166, 38, 38, 0.15); 
+    box-shadow: 10px 25px rgba(0, 0, 0, 0.03); 
+    
+    /* KUNCI PRESISI: Mengatur isi di dalam kotak agar selalu di tengah */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center; 
+}
+.countdown-detik { 
+    flex: 1; 
+    width: 70px; 
+    margin: auto;/* Menjaga lebar kotak tetap konsisten & tidak gepeng */
+    height: auto;
+    background: linear-gradient(135deg, #ffffff 0%, #fff5f5 100%); 
+    padding: 8px 8px; /* Sedikit memperlebar jarak padding kiri-kanan */
+    border-radius: 40px; 
+    border: 1px solid rgba(166, 38, 38, 0.15); 
+    box-shadow: 10px 25px rgba(0, 0, 0, 0.03); 
+    
+    /* KUNCI PRESISI: Mengatur isi di dalam kotak agar selalu di tengah */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center; 
+}
+
+
+
+
 
 
 
