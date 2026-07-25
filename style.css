@@ -1773,7 +1773,7 @@ html {
     .countdown-hari
     .countdown-menit
     .countdown-detik
-    countdown-section{
+    .countdown-section{
         padding: 0 5px;
         gap: 5px;
     }
