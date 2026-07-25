@@ -1673,129 +1673,46 @@ html {
     scroll-behavior: smooth;
 }
 /* Kontainer utama menggunakan Flexbox sejajar horizontal */
-.flower {
+.countdown-box {
     display: flex;
-    align-items: center;      /* Menyejajarkan posisi vertikal ke tengah */
-    justify-content: center; /* Mengetengahkan seluruh elemen */
-    gap: 15px;               /* Jarak antar kolom dan bunga */
-    width: 50%;        /* Batas lebar agar pas di layar */
-    margin: 20px auto;       /* Posisi rata tengah */
+    flex-direction: row;        /* Berjajar horizontal: Kotak - Kotak - Bunga - Kotak - Kotak */
+    align-items: center;        /* Rata tengah secara vertikal */
+    justify-content: center;   /* Rata tengah secara horizontal */
+    gap: 8px;                   /* Jarak antar elemen agar tidak sempit di HP */
+    width: 100%;
+    max-width: 500px;           /* Batas lebar di laptop */
+    margin: 20px auto;
     padding: 0 10px;
+    box-sizing: border-box;
 }
-
-/* Kolom Kiri & Kanan (Menumpuk 2 kotak secara vertikal) */
-
-@media (max-width: 380px) {
-    .countdown-flower-container {
-        gap: 8px;
-    }
-    .flower-orna {
-        width: 30%;
-    }
-}
-.countdown-hari { 
-    flex: 1; 
-    position: relative;
-    width: 100%; 
-    margin: auto;/* Menjaga lebar kotak tetap konsisten & tidak gepeng */
-    height: auto;
-    right: -20px;
-    background: linear-gradient(135deg, #ffffff 0%, #fff5f5 100%); 
-    padding: 8px 30px; /* Sedikit memperlebar jarak padding kiri-kanan */
-    border-radius: 40px; 
-    border: 1px solid rgba(166, 38, 38, 0.15); 
-    box-shadow: 10px 25px rgba(0, 0, 0, 0.03); 
+.countdown-item {
+    position: relative;         /* KUNCI: WAJIB RELATIVE (Bukan Absolute!) */
+    top: auto;
+    left: auto;
+    transform: none;
     
-    /* KUNCI PRESISI: Mengatur isi di dalam kotak agar selalu di tengah */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center; 
+    flex: 1;                    /* Ukuran kotak membagi ruang secara adil */
+    min-width: 0;               /* Mencegah overflow di HP */
+    background: #ffffff;        /* Atau ganti warna background pilihanmu */
+    border-radius: 10px;
+    padding: 10px 4px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    box-sizing: border-box;
 }
-.countdown-jam { 
-    flex: 1; 
-    position: relative;
-    width: 100%px; 
-    margin: auto;/* Menjaga lebar kotak tetap konsisten & tidak gepeng */
-    height: auto;
-    right: -60px;
-    background: linear-gradient(135deg, #ffffff 0%, #fff5f5 100%); 
-    padding: 8px 30px; /* Sedikit memperlebar jarak padding kiri-kanan */
-    border-radius: 40px; 
-    border: 1px solid rgba(166, 38, 38, 0.15); 
-    box-shadow: 10px 25px rgba(0, 0, 0, 0.03); 
+.flower {
+    position: relative;         /* KUNCI: Hapus absolute agar tidak melayang menindih kotak */
+    top: auto;
+    left: auto;
+    transform: none;
     
-    /* KUNCI PRESISI: Mengatur isi di dalam kotak agar selalu di tengah */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center; 
-}
-/* Hilangkan background, border, dan bayangan dari kotak pembungkus */
-.countdown-menit { 
-    flex: 1; 
-    position: relative;
-    width: 100%; 
-    margin: auto;/* Menjaga lebar kotak tetap konsisten & tidak gepeng */
+    width: 60px;                /* Ukuran ramping yang pas berdampingan dengan 4 kotak */
+    max-width: 75px;
     height: auto;
-    left :-60px;
-    background: linear-gradient(135deg, #ffffff 0%, #fff5f5 100%); 
-    padding: 8px 30px; /* Sedikit memperlebar jarak padding kiri-kanan */
-    border-radius: 40px; 
-    border: 1px solid rgba(166, 38, 38, 0.15); 
-    box-shadow: 10px 25px rgba(0, 0, 0, 0.03); 
-    
-    /* KUNCI PRESISI: Mengatur isi di dalam kotak agar selalu di tengah */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center; 
+    object-fit: contain;
+    flex-shrink: 0;             /* Mencegah bunga tergepengkan */
+    margin: 0 2px;
 }
-.countdown-detik { 
-    flex: 1; 
-    position: relative;
-    width: 100%; 
-    margin: auto;/* Menjaga lebar kotak tetap konsisten & tidak gepeng */
-    height: auto;
-    left :-20px;
-    background: linear-gradient(135deg, #ffffff 0%, #fff5f5 100%); 
-    padding: 8px 30px; /* Sedikit memperlebar jarak padding kiri-kanan */
-    border-radius: 40px; 
-    border: 1px solid rgba(166, 38, 38, 0.15); 
-    box-shadow: 10px 25px rgba(0, 0, 0, 0.03); 
-    
-    /* KUNCI PRESISI: Mengatur isi di dalam kotak agar selalu di tengah */
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center; 
-}
-/* 1. JAGA AGAR TIDAK OVERFLOW KELUAR LAYAR */
-
-    @media (max-width: 360px) {
-  
-    .countdown-container{
-        padding: 0 5px;
-        gap: 5px;
-    }
-    .countdown-container {
-        padding: 6px 2px;
-    }
-}
-
-/* 💻 Laptop & Desktop Layar Lebar (> 1024px) */
-@media (min-width: 1024px) {
-    .countdown-container {
-        max-width: 650px;
-        margin: 35px auto;
-    }
-    /* Kamu juga bisa sesuaikan posisinya khusus di HP jika perlu */
-   
-
 
 
 
