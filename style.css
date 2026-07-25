@@ -1769,18 +1769,22 @@ html {
 /* 1. JAGA AGAR TIDAK OVERFLOW KELUAR LAYAR */
 
     @media (max-width: 360px) {
-    .countdown-wrapper {
+    .countdown-wrapper
+    .countdown-hari
+    .countdown-menit
+    .countdown-detik
+    countdown-section{
         padding: 0 5px;
         gap: 5px;
     }
-    .countdown-item {
+    .countdown-section {
         padding: 6px 2px;
     }
 }
 
 /* 💻 Laptop & Desktop Layar Lebar (> 1024px) */
 @media (min-width: 1024px) {
-    .countdown-wrapper {
+    .countdown-section {
         max-width: 650px;
         margin: 35px auto;
     }
