@@ -3,6 +3,13 @@
     padding: 0;
     box-sizing: border-box;
 }
+@font-face {
+    font-family: 'VerandahReverie';
+    src: url('verandah_reverie/VerandahReverie_PERSONAL_USE_ONLY.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 
 :root {
     --biru-awan-gelap: #b6c9dc;
@@ -40,7 +47,7 @@
     position: absolute;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at 30% 70%, var(--putih-bersih) 0%, #ffffff 60%, #fbebeb 100%);
+    background: radial-gradient(circle at 20% 70% , var(--putih-bersih) 20%, #b6c9dc 60%, #fbebeb 100%,#b6c9dc 60%);
     transition: transform 5s cubic-bezier(0.5, 1, 1, 0.5); 
     z-index: 1;
 }
@@ -136,8 +143,10 @@
     animation: logoinfo 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
   animation-delay: 1.3s; 
   opacity: 0;
+  
 }
-@keyframes logoinfo {
+@keyframes logoinfo 
+{
   from {
     opacity: 0;
     transform: scale(0.5); /* Muncul mengecil dari dalam */
@@ -147,6 +156,40 @@
     transform: scale(1);   /* Kembali ke ukuran asli */
   }
 }
+@keyframes namee 
+{
+  from {
+    opacity: 0;
+    transform: scale(0.5); /* Muncul mengecil dari dalam */
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);   /* Kembali ke ukuran asli */
+  }
+}
+@keyframes namee2 
+{
+  from {
+    opacity: 0;
+    transform: scale(0.5); /* Muncul mengecil dari dalam */
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);   /* Kembali ke ukuran asli */
+  }
+}
+@keyframes guest-label 
+{
+  from {
+    opacity: 0;
+    transform: scale(0.5); /* Muncul mengecil dari dalam */
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);   /* Kembali ke ukuran asli */
+  }
+}
+
 
 
 
@@ -230,23 +273,78 @@
     letter-spacing: 4px;
     color: #7a8b99;
     font-weight: 600;
-    margin-bottom: 5px;
+    margin-bottom: 20px;
     text-transform: uppercase;
 }
 
 .couple-names-cover {
-    font-family: 'Cinzel', serif;
+    font-family: 'VerandahReverie';
     color: #1A2E40; /* Warna biru gelap elegan */
     font-size: 32px;
     font-weight: 700;
     margin-bottom: 35px;
 }
+.couple-names-cover1 {
+  position: relative;
+    font-family: 'VerandahReverie', serif;
+    color: #1A2E40; /* Warna biru gelap elegan */
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    right:90px;
+}
+.couple-names-cover2 {
+    font-family: 'VerandahReverie', serif;
+    position: relative;
+    color: #1A2E40; /* Warna biru gelap elegan */
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    left :90px;
+}
 
 .guest-label {
+    letter-spacing: 0px;
     font-family: 'Montserrat', sans-serif;
     font-size: 12px;
-    color: #8a9ba8;
-    margin-bottom: 8px;
+    color: #fffffff;
+    padding: 0px;
+    margin-top :40px;
+       animation: guest-label 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  animation-delay: 1.3s; 
+  opacity: 0;
+}
+.namee {
+ writing-mode: vertical-lr; /* Membuat teks berjalan dari atas ke bawah */
+    text-orientation: upright;  /* KUNCI: Memastikan huruf tetap berdiri tegak (tidak miring) */
+    letter-spacing: -10px;        /* Memberi jarak antar huruf (opsional) */
+    margin: 0 auto;             /* Agar posisi teks rata tengah */
+    text-align: center;
+  letter-spacing: px;
+  position: relative;
+    font-family: 'VerandahReverie';
+    font-size: 40px;
+    color: #fffffff;
+    margin-bottom: 40px;
+    animation: namee 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  animation-delay: 1.3s; 
+  opacity: 0;
+}
+.namee2{
+  writing-mode: vertical-lr; /* Membuat teks berjalan dari atas ke bawah */
+    text-orientation: upright;  /* KUNCI: Memastikan huruf tetap berdiri tegak (tidak miring) */
+    letter-spacing: -20px;        /* Memberi jarak antar huruf (opsional) */
+    margin: 0 auto;             /* Agar posisi teks rata tengah */
+    text-align: center;
+  letter-spacing: px;
+  position: relative;
+    font-family: 'VerandahReverie';
+    font-size: 40px;
+    color: #fffffff;
+    margin-top: 40px;
+    animation: namee2 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+  animation-delay: 1.3s; 
+  opacity: 0;
 }
 
 .guest-name {
@@ -315,7 +413,12 @@
     align-items: center;
     /* Mengatur margin atas-bawah untuk menentukan kerapatan antar bagian (atur sesuai selera) */
     padding: 0px 0px; 
-    margin-top: -20px; /* Sedikit menarik kartu di bawahnya agar lebih naik */
+    margin-top: -20px;
+    background-color: #ffffff;
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(208, 228, 247, 0.5) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(252, 228, 236, 0.5) 0%, transparent 40%);
+    background-repeat: no-repeat;/* Sedikit menarik kartu di bawahnya agar lebih naik */
 }
 /* --- AMINASI SCROLL REVEAL ALUR HALUS (SEPERTI VIDEO REFERENSI) --- */
 
@@ -360,13 +463,17 @@
     position: relative;
     width: 100%;
     min-width: auto;
-    background: linear-gradient(135deg, #fbebeb 0%, #fdfdfd 50%, #e6f0fa 100%);
-    backdrop-filter: blur(10px);
+   
     padding: 70px 20px;
     text-align: center;
     border-radius: 0px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
     border:1px solid #f0eae4; 
+     background-color: #ffffff;
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(208, 228, 247, 0.5) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(252, 228, 236, 0.5) 0%, transparent 40%);
+    background-repeat: no-repeat;
 }
 
 
@@ -451,8 +558,31 @@
     text-align: center;
         background: linear-gradient(135deg, #e6f0fa 0%, #fdfdfd 50%, #fbebeb 100%);
         padding: 0px 20px;
-
+    position: relative;
+    overflow:hidden ;
 }
+ .mempelai-container::before {
+   content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  background-image: url('pngb.png');
+    background-repeat: repeat;
+    background-size: 200px;
+    
+    /* KUNCI: Mengatur transparan/opacity HANYA untuk gambarnya */
+    opacity: 0.15; /* Ubah nilainya (0.1 - 0.3) sesuai selera kehalusan */
+    
+    z-index: 0; /* Taruh di belakang */
+}
+}
+
+
+
+
+
 
 .mempelai-opening {
     margin-bottom: 40px;
@@ -514,7 +644,7 @@
 
 /* Tipografi Nama Mempelai */
 .nama-lengkap-mempelai {
-    font-family: 'Cinzel', serif;
+    font-family: 'VerandahReverie';
     font-size: 24px;
     color: #b58d63; /* Mengikuti nuansa cokelat keemasan estetik */
     font-weight: 500;
@@ -567,7 +697,26 @@
     display: flex;
     justify-content: center;
       background: linear-gradient(135deg, #fbebeb 0%, #fdfdfd 50%, #e6f0fa 100%);
+      position: relative ;
+      overflow:hidden ;
 }
+  .page-section-story::before {
+   content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  background-image: url('pngb.png');
+    background-repeat: repeat;
+    background-size: 200px;
+    
+    /* KUNCI: Mengatur transparan/opacity HANYA untuk gambarnya */
+    opacity: 0.15; /* Ubah nilainya (0.1 - 0.3) sesuai selera kehalusan */
+    
+    z-index: 0; /* Taruh di belakang */
+}
+
 
 .story-container {
     width: 100%;
@@ -719,7 +868,7 @@
 
 /* Kartu Putih Utama Tempat Detail Acara */
 .event-card-main {
-    background: #ffffff;
+    background:
     border-radius: 0px; /* Sudut melengkung halus yang elegan */
     overflow: hidden;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
@@ -858,7 +1007,8 @@
 /* --- 8. STYLE KOLOM UCAPAN & KEHADIRAN --- */
 .page-section-wishes {
     width: 100%;
-   background: linear-gradient(135deg, #e6f0fa 0%, #fdfdfd 50%, #fbebeb 100%);
+
+   background-image: 'sepatu.jpg';
     padding: 50px 20px;
     display: flex;
     justify-content: center;
@@ -973,7 +1123,8 @@
 
 .btn-send-wishes {
     padding: 12px;
-     background: linear-gradient(135deg, #e6f0fa 0%, #fdfdfd 50%, #fbebeb 100%);
+   background: linear-gradient(135deg, #e6f0fa 0%, #fdfdfd 50%, #fbebeb 100%);
+ 
     color: #555555;
     border: none;
     border-radius: 6px;
@@ -1477,7 +1628,7 @@ body .doa-card {
   transform-origin: center center;
  filter: invert(88%) sepia(20%) saturate(280%) brightness(80%) contrast(97%) hue-rotate(185deg);
 
-  z-index: 4;
+  z-index: -1;
   display: block;
   pointer-events: none;
 }
@@ -1713,6 +1864,25 @@ html {
     flex-shrink: 0;             /* Mencegah bunga tergepengkan */
     margin: 0 2px;
 }
+.sepatu {
+    position: relative;
+    width: 100%;
+    max-height: 450px;
+    position: center;
+    background: linear-gradient(135deg, #e6f0fa 0%, #fbfbfb 70%, #ffffff 100%);
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+    z-index: 9999;
+      display: block;
+    margin: 0 auto;
+
+    /* Trik agar bawahnya memudar ke transparan */
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 50%);
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%);
+}
+/* Pembungkus agar background tidak merusak layout dan tidak bikin scrollbar */
+
 
 
 
