@@ -7,6 +7,7 @@
     <title>Undangan Pernikahan Zainus & Ica</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Sacramento&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -711,6 +712,44 @@ navItems.forEach(item => {
         <span>Ucapan</span>
     </a>
 </nav>
+<!-- Container Bunga Bertaburan -->
+<div id="flower-container"></div>
+
+<script>
+function createPetal() {
+    const container = document.getElementById('flower-container');
+    if (!container) return;
+
+    const petal = document.createElement('div');
+    petal.classList.add('petal');
+
+    // Menggunakan gambar bunga kamu atau karakter emoji bunga sakura
+    // Jika punya gambar PNG bunga: petal.style.backgroundImage = "url('flower.png')";
+    petal.innerHTML = '🌸'; // Atau gunakan emoji bunga 🌸 / 🌺
+
+    // Variasi acak posisi, ukuran, dan kecepatan jatuh
+    const randomLeft = Math.random() * 100; // Posisi horizontal acak (0-100%)
+    const randomSize = Math.random() * 15 + 10; // Ukuran acak (10px - 25px)
+    const randomDuration = Math.random() * 5 + 4; // Kecepatan acak (4s - 9s)
+    const randomDelay = Math.random() * 2; // Penundaan acak
+
+    petal.style.left = randomLeft + 'vw';
+    petal.style.fontSize = randomSize + 'px';
+    petal.style.animationDuration = randomDuration + 's';
+    petal.style.animationDelay = randomDelay + 's';
+
+    container.appendChild(petal);
+
+    // Hapus elemen bunga setelah animasi selesai agar memori hemat
+    setTimeout(() => {
+        petal.remove();
+    }, (randomDuration + randomDelay) * 1000);
+}
+
+// Jalankan fungsi pembuatan bunga setiap 300 milidetik
+setInterval(createPetal, 300);
+</script>
+
 
 </body>
 </html>

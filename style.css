@@ -1,14 +1,24 @@
 * {
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
-}
+    box-sizing:border-box;}
+
 @font-face {
-    font-family: 'VerandahReverie';
-    src: url('verandah_reverie/VerandahReverie_PERSONAL_USE_ONLY.otf') format('opentype');
+    font-family: 'Verandah';
+    src: url('verandah.woff2') format('woff2'),
+         url('verandah.woff') format('woff');
     font-weight: normal;
     font-style: normal;
+    font-display: swap;
 }
+.sacramento-regular {
+  font-family: "Sacramento", cursive;
+  font-weight: 400;
+  font-style: normal;
+}
+
+
+
 
 
 :root {
@@ -265,28 +275,39 @@
     align-items: center;
     justify-content: center;
     flex-grow: 1;
+   
 }
+
+
 
 .greetings-text {
     font-family: 'Montserrat', sans-serif;
     font-size: 11px;
     letter-spacing: 4px;
     color: #7a8b99;
-    font-weight: 600;
-    margin-bottom: 20px;
+    font-weight: normal;
     text-transform: uppercase;
+    margin-bottom: 20px;
+
 }
 
 .couple-names-cover {
-    font-family: 'VerandahReverie';
+    font-family: 'sacramento',cursive;
     color: #1A2E40; /* Warna biru gelap elegan */
     font-size: 32px;
-    font-weight: 700;
-    margin-bottom: 35px;
+    font-weight: 400;
+    display: inline-block;
+    padding: 12px 10px;
+    border: 1px solid #c5a880;          /* Garis luar */
+    outline: 2px solid #c5a880;         /* Garis ganda kedua */
+    outline-offset: 4px;                /* Jarak antara garis luar dan dalam */
+    margin: 15px auto;
+
+
 }
 .couple-names-cover1 {
   position: relative;
-    font-family: 'VerandahReverie', serif;
+    font-family: 'sacramento', serif;
     color: #1A2E40; /* Warna biru gelap elegan */
     font-size: 32px;
     font-weight: 700;
@@ -294,7 +315,7 @@
     right:90px;
 }
 .couple-names-cover2 {
-    font-family: 'VerandahReverie', serif;
+    font-family: 'sacramento', serif;
     position: relative;
     color: #1A2E40; /* Warna biru gelap elegan */
     font-size: 32px;
@@ -322,7 +343,7 @@
     text-align: center;
   letter-spacing: px;
   position: relative;
-    font-family: 'VerandahReverie';
+    font-family: 'sacramento';
     font-size: 40px;
     color: #fffffff;
     margin-bottom: 40px;
@@ -338,7 +359,7 @@
     text-align: center;
   letter-spacing: px;
   position: relative;
-    font-family: 'VerandahReverie';
+    font-family: 'sacramento';
     font-size: 40px;
     color: #fffffff;
     margin-top: 40px;
@@ -542,42 +563,50 @@
 .countdown-note { font-family: 'Montserrat', sans-serif; font-size: 12px; font-style: italic; color: #b58d63; font-weight: 600; text-align:center; }
 
 /* --- 4. STYLE HALAMAN PROFIL MEMPELAI --- */
+/* Pembungkus Paling Luar (Menempel ke Pinggir Layar) */
 .page-section-mempelai {
     width: 100%;
-    padding: 0px 50px;
+    min-height: 100vh;
+    padding: 0;                /* KUNCI: Ubah dari 0px 50px jadi 0 agar full ke tepi */
     display: flex;
     justify-content: center;
-    background: linear-gradient(135deg, #e6f0fa 0%, #fdfdfd 50%, #fbebeb 100%);
-
-    
+    position: relative;
+    overflow: hidden;
 }
 
+/* Container Dalam */
 .mempelai-container {
     width: 100%;
-    max-width: auto;
+    min-height: 100vh;
     text-align: center;
-        background: linear-gradient(135deg, #e6f0fa 0%, #fdfdfd 50%, #fbebeb 100%);
-        padding: 0px 20px;
+    background: linear-gradient(135deg, #e6f0fa 0%, #fdfdfd 50%, #fbebeb 100%);
+    padding: 40px 20px;        /* Padding atas-bawah 40px, kiri-kanan 20px untuk ISI TEKS saja */
     position: relative;
-    overflow:hidden ;
 }
- .mempelai-container::before {
-   content: "";
+
+/* Lapisan Background Motif / Corak */
+.mempelai-container::before {
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-  background-image: url('pngb.png');
+    background-image: url('pngb.png');
     background-repeat: repeat;
     background-size: 200px;
-    
-    /* KUNCI: Mengatur transparan/opacity HANYA untuk gambarnya */
-    opacity: 0.15; /* Ubah nilainya (0.1 - 0.3) sesuai selera kehalusan */
-    
-    z-index: 0; /* Taruh di belakang */
+    opacity: 0.15;            /* Tingkat transparan corak */
+    z-index: 0;
+    pointer-events: none;     /* Supaya tidak menghalangi klik/scroll */
 }
+
+/* KUNCI TAMBAHAN: Pastikan semua teks & foto di dalam container ada DI ATAS motif */
+.mempelai-container > * {
+    position: relative;
+    z-index: 1;
 }
+
+
 
 
 
@@ -615,7 +644,8 @@
     position: relative;
     width: 180px;
     height: 180px;
-    margin-bottom: 20px;
+    margin-bottom:20px;
+    margin-top: 40px;
 }
 
 .mempelai-avatar-img {
@@ -644,10 +674,10 @@
 
 /* Tipografi Nama Mempelai */
 .nama-lengkap-mempelai {
-    font-family: 'VerandahReverie';
+    font-family: 'sacramento';
     font-size: 24px;
     color: #b58d63; /* Mengikuti nuansa cokelat keemasan estetik */
-    font-weight: 500;
+    font-weight: 800;
     margin-bottom: 8px;
 }
 
@@ -700,7 +730,7 @@
       position: relative ;
       overflow:hidden ;
 }
-  .page-section-story::before {
+ .page-section-story::before {
    content: "";
     position: absolute;
     top: 0;
@@ -718,11 +748,13 @@
 }
 
 
+
+
 .story-container {
     width: 100%;
     max-width: 450px;
-    text-align: center;
-}
+    text-align: center;}
+
 
 .story-title {
     font-family: 'Cinzel', serif;
@@ -959,7 +991,24 @@
     padding: 60px 20px;
     display: flex;
     justify-content: center;
-    background: #ffffff; /* Latar belakang bersih untuk menonjolkan warna foto */
+   background: linear-gradient(135deg, #fbebeb 0%, #fdfdfd 50%, #e6f0fa 100%);
+   position:relative ;
+   overflow: hidden;}
+.page-section-gallery::before {
+   content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  background-image: url('pngb.png');
+    background-repeat: repeat;
+    background-size: 200px;
+    
+    /* KUNCI: Mengatur transparan/opacity HANYA untuk gambarnya */
+    opacity: 0.15; /* Ubah nilainya (0.1 - 0.3) sesuai selera kehalusan */
+    
+    z-index: 0; /* Taruh di belakang */
 }
 
 .gallery-container {
@@ -967,6 +1016,10 @@
     max-width: 450px;
     text-align: center;
 }
+ /* Latar belakang bersih untuk menonjolkan warna foto */
+
+  
+
 
 .gallery-title {
     font-family: 'Cinzel', serif;
@@ -1882,6 +1935,40 @@ html {
     mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 40%, rgba(0,0,0,0) 100%);
 }
 /* Pembungkus agar background tidak merusak layout dan tidak bikin scrollbar */
+/* Container tempat bunga jatuh */
+#flower-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Mencegah bunga menghalangi tombol/klik */
+    z-index: 9999;        /* Memastikan bunga melayang di atas semua elemen */
+    overflow: hidden;
+}
+
+/* Style tiap kelopak bunga */
+.petal {
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.8;
+    animation: fall linear infinite;
+}
+
+/* Keyframes Gerakan Jatuh & Miring */
+@keyframes fall {
+    0% {
+        top: -10%;
+        transform: translateX(0) rotate(0deg);
+        opacity: 0.9;
+    }
+    100% {
+        top: 105%;
+        transform: translateX(100px) rotate(360deg);
+        opacity: 0.2;
+    }
+}
 
 
 
