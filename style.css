@@ -1970,6 +1970,136 @@ html {
     }
 }
 
+/* --- SECTION GIFT / AMPLOP DIGITAL --- */
+.gift-section {
+    padding: 50px 20px;
+    text-align: center;
+     background: linear-gradient(135deg, #fbebeb 0%, #fdfdfd 50%, #e6f0fa 100%);
+}
+
+.gift-container {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.gift-title {
+    font-family: 'Cinzel', serif;
+    font-size: 28px;
+    color: #1A2E40;
+    margin-bottom: 15px;
+}
+
+.gift-subtitle {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 30px;
+}
+
+/* KARTU AMPLOP DIGITAL */
+.gift-card {
+    background: linear-gradient(135deg, #fbebeb 0%, #fdfdfd 50%, #e6f0fa 100%);
+    border-radius: 15px;
+    padding: 30px 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    border: 1px solid #eaeaea;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* BINGKAI QR CODE ELEGANT */
+.qr-frame {
+    position: relative;
+    padding: 15px;
+    background: #fff;
+    border: 2px solid #d4af37; /* Warna Emas */
+    border-radius: 12px;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+/* Sudut Hiasan Bingkai */
+.frame-corner {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    border-color: #1A2E40;
+    border-style: solid;
+}
+
+.top-left {
+    top: -4px;
+    left: -4px;
+    border-width: 3px 0 0 3px;
+}
+
+.top-right {
+    top: -4px;
+    right: -4px;
+    border-width: 3px 3px 0 0;
+}
+
+.bottom-left {
+    bottom: -4px;
+    left: -4px;
+    border-width: 0 0 3px 3px;
+}
+
+.bottom-right {
+    bottom: -4px;
+    right: -4px;
+    border-width: 0 3px 3px 0;
+}
+
+/* GAMBAR QR CODE */
+.qr-image {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    display: block;
+    border-radius: 6px;
+}
+
+/* DETAIL BANK / QRIS */
+.bank-name {
+    font-weight: bold;
+    font-size: 16px;
+    color: #1A2E40;
+    margin-bottom: 5px;
+}
+
+.account-number {
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    color: #d4af37;
+    margin-bottom: 5px;
+}
+
+.account-name {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+/* TOMBOL SALIN */
+.btn-copy {
+    background-color: #1A2E40;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.btn-copy:hover {
+    background-color: #d4af37;
+}
+
+
 
 
 

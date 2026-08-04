@@ -401,6 +401,37 @@
 
         </div>
     </div>
+    <section class="gift-section">
+    <div class="gift-container">
+        <h2 class="gift-title">Amplop Digital</h2>
+        <p class="gift-subtitle">
+            Doa Restu Anda merupakan karunia yang sangat berarti bagi kami. 
+            Namun jika Anda ingin memberikan tanda kasih,
+        </p>
+
+        <div class="gift-card">
+            <div class="qr-frame">
+                <span class="frame-corner top-left"></span>
+                <span class="frame-corner top-right"></span>
+                <span class="frame-corner bottom-left"></span>
+                <span class="frame-corner bottom-right"></span>
+                
+                <img src="qris.jpeg" alt="QRIS Amplop Digital" class="qr-image">
+            </div>
+
+            <div class="bank-details">
+                <p class="bank-name">QRIS / BANK Bni</p>
+                <p class="account-number" id="rekening">1952466969</p>
+                <p class="account-name">a.n. etopia</p>
+                
+                <button class="btn-copy" onclick="copyRekening()">
+                    📋 Salin No. Rekening
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
         <!-- 9. HALAMAN PENUTUP (CLOSING) -->
     <div id="closing-section" class="page-section-closing">
         
@@ -767,6 +798,15 @@ function createPetal() {
 
 // Jalankan fungsi pembuatan bunga setiap 300 milidetik
 setInterval(createPetal, 300);
+function copyRekening() {
+    var rekText = document.getElementById("rekening").innerText;
+    navigator.clipboard.writeText(rekText).then(function() {
+        alert("Nomor Rekening berhasil disalin: " + rekText);
+    }, function(err) {
+        alert("Gagal menyalin nomor rekening.");
+    });
+}
+
 </script>
 
 
