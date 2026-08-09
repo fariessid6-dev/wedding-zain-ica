@@ -529,7 +529,7 @@
     /* Kita tambahkan gap dan margin langsung di sini agar aman */
     gap: 15px; 
     margin: 30px auto; 
-    background: #ffffff;
+    background: #fbebeb;
 
   
 } /* <--- PASTIKAN ADA TANDA TUTUP INI DI BARIS 318! */
@@ -729,6 +729,7 @@
       background: linear-gradient(135deg, #fbebeb 0%, #fdfdfd 50%, #e6f0fa 100%);
       position: relative ;
       overflow:hidden ;
+  
 }
  .page-section-story::before {
    content: "";
@@ -773,6 +774,7 @@
     margin-bottom: 40px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
     border: 6px solid #ffffff;
+     opacity: 0.3;
 }
 
 .story-img {
@@ -781,8 +783,6 @@
     object-fit: cover;
     object-position: center;
 }
-
-/* Desain Struktur Linimasa (Timeline) */
 .timeline {
     position: relative;
     padding: 10px 0;
@@ -803,7 +803,8 @@
 
 .timeline-item {
     position: relative;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
+    margin-top: 20px;
     padding-left: 45px; /* Jarak teks dari garis */
 }
 
@@ -986,6 +987,13 @@
     background-color: #a47e56;
 }
 /* --- 7. STYLE HALAMAN OUR GALLERY --- */
+/* 1. KEMBALIKAN STYLE SECTION UTAMA (Hapus mask-image) */
+/* 1. KEMBALIKAN STYLE SECTION GALLERY */
+
+/* 2. POTONGAN GELOMBANG / ROBEKAN ATAS */
+
+
+/* 3. POTONGAN GELOMBANG / ROBEKAN BAWAH */
 .page-section-gallery {
     width: 100%;
     padding: 60px 20px;
@@ -1010,6 +1018,8 @@
     
     z-index: 0; /* Taruh di belakang */
 }
+
+
 
 .gallery-container {
     width: 100%;
@@ -1057,7 +1067,6 @@
 .gallery-item:hover .gallery-img-thumb {
     transform: scale(1.08);
 }
-/* --- 8. STYLE KOLOM UCAPAN & KEHADIRAN --- */
 .page-section-wishes {
     width: 100%;
 
@@ -1983,7 +1992,7 @@ html {
 }
 
 .gift-title {
-    font-family: 'Cinzel', serif;
+    font-family: 'Verandah';
     font-size: 28px;
     color: #1A2E40;
     margin-bottom: 15px;
@@ -1994,6 +2003,7 @@ html {
     color: #555;
     line-height: 1.6;
     margin-bottom: 30px;
+    
 }
 
 /* KARTU AMPLOP DIGITAL */
@@ -2098,31 +2108,146 @@ html {
 .btn-copy:hover {
     background-color: #d4af37;
 }
+/* --- SECTION FOTO BERTUMPUK --- */
+/* --- SECTION FOTO BERTUMPUK LINGKARAN --- */
+.stacked-photos-section {
+    padding: 50px 20px;
+    background-color: #fdfaf6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 
+/* Pembungkus Area Foto */
+.stacked-photos-container {
+    position: relative;
+    width: 100%;
+    max-width: 350px;  /* Lebar area tumpukan */
+    height: 350px;     /* Tinggi area tumpukan */
+    margin: 0 auto;
+}
 
+/* Base Style Frame Foto Lingkaran */
+.photo-wrapper {
+    position: absolute;
+    padding: 6px;              /* Ketebalan lis bingkai putih */
+    background: #ffffff;
+    border-radius: 50%;         /* KUNCI: Membuat bentuk Lingkaran sempurna */
+    border: 2px solid #c5a880;  /* Garis lis warna emas/cokelat */
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s ease;
+}
 
+/* Gambar di Dalam Lingkaran */
+.stacked-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;         /* Agar foto tidak gepeng */
+    border-radius: 50%;        /* Gambar di dalam juga berbentuk lingkaran */
+    display: block;
+}
 
+/* FOTO 1: Lingkaran Belakang (Lebih Kecil, Agak ke Kanan Atas) */
+.photo-back {
+    width: 180px;
+    height: 180px;            /* Harus sama dengan width agar bulat sempurna */
+    top: 10px;
+    right: 30px;
+    z-index: 1;
+    opacity: 0.9;
+}
 
+/* FOTO 2: Lingkaran Depan (Lebih Besar, Agak ke Kiri Bawah) */
+.photo-front {
+    width: 180px;
+    height: 180px;            /* Harus sama dengan width agar bulat sempurna */
+    top: 10px;
+    left: 30px;
+    z-index: 2;               /* Berada di atas lingkaran belakang */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15); /* Bayangan lebih tegas */
+}
 
+/* Efek Membesar Sedikit Saat Di-touch/Hover */
+.stacked-photos-container:hover .photo-front {
+    transform: scale(1.03);
+}
 
+.stacked-photos-container:hover .photo-back {
+    transform: scale(1.02);
+}
+/* Style untuk Logo BNI di bawah QRIS */
+.bni-logo {
+    width: 70px;            /* Ukuran lebar logo (bisa diubah sesuai selera: 60px - 80px) */
+    height: auto;           /* Menjaga proporsi gambar */
+    display: block;
+    margin: 15px auto 8px;  /* Jarak: atas 15px, tengah rata, bawah 8px */
+    object-fit: contain;
+}
+/* --- STYLE KALENDER PERNIKAHAN --- */
+.wedding-calendar-card {
+   background-image: src 'hand.jpg' ;/* Warna hijau sage / bisa ganti ke warna tema Anda (#4a7e56) */
+    color: #fffffff;
+    max-width: 340px;
+    margin: 30px auto;
+    padding: 30px 20px;
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    font-family: 'verandah', sans-serif;
+}
 
+.calendar-header .calendar-month {
+    font-family: 'Cinzel', serif;
+    font-size: 1.3rem;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
 
+.calendar-days-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    font-size: 0.75rem;
+    font-weight: 600;
+    opacity: 0.8;
+    margin-bottom: 12px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding-bottom: 8px;
+}
 
+.calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    row-gap: 10px;
+    align-items: center;
+    font-size: 0.9rem;
+}
 
+.calendar-grid span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 36px;
+    width: 36px;
+    margin: 0 auto;
+    position: relative;
+}
 
+/* Penanda Khusus Tanggal Pernikahan */
+.calendar-grid span.marked-date {
+    background-color: rgba(255, 255, 255, 0.25);
+    border: 1.5px solid #ffffff;
+    border-radius: 50%;
+    font-weight: bold;
+    color: #fbebeb;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* Icon Hati kecil di atas/samping tanggal pernikahan */
+.calendar-heart {
+    position: absolute;
+    top: -4px;
+    right: -2px;
+    font-size: 0.65rem;
+    color: #ff6b6b;
+}
 
